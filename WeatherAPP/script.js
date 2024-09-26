@@ -1,3 +1,4 @@
+// For weather details fetch 
 let weather ={
     "apikey": "4e47a6d6b82b6dec3acf0fc0a1430b8e",
     fetchweather: function (city)
@@ -57,6 +58,7 @@ function getcity(address)
     weather.fetchweather(address);   
 }
 
+// For store of Coordinate BC
 function showcoordinate(longitude,latitude)
 {
     Microsoft.Dynamics.NAV.InvokeExtensibilityMethod("showcoordinate", [{
@@ -65,32 +67,7 @@ function showcoordinate(longitude,latitude)
     }]);
     showLocation(longitude,latitude)
 }
-// var loca=document.getElementById("location");
-function getlocation()
-    {
-        if (navigator.geolocation)
-            {
-                navigator.geolocation.getCurrentPosition(showposition,showerror);
-            }
-        else{
-            loca.innerHTML="The browser doesnot support location";
-
-        }
-
-    }
-function showposition(position)
-{
-    console.log("LongandLat",position.coords.latitude,position.coords.longitude)
-    showLocation(position.coords.longitude,position.coords.latitude,);
-}
-var permission=document.querySelector(".error");
-function showerror(error)
-{
-    if(error.PERMISSION_DENIED)
-    {
-        permission.innerHTML="User doesnot give the permission ";
-    }
-}
+//for location details fetch 
 let address=document.getElementById("Address");
 var City;
 const showLocation = async (longitude,latitude) => {
@@ -122,4 +99,32 @@ const showLocation = async (longitude,latitude) => {
     }
   };
 
-Microsoft.Dynamics.NAV.InvokeExtensibilityMethod('ControlReady', []);
+  //for fetch user  real time location
+ var error=document.querySelector(".error");
+function getlocation()
+{
+    if (navigator.geolocation)
+        {
+            navigator.geolocation.getCurrentPosition(showposition,showerror);
+        }
+    else{
+        error.innerHTML="The browser doesnot support location";
+
+    }
+
+}
+function showposition(position)
+{
+console.log("LongandLat",position.coords.latitude,position.coords.longitude)
+showLocation(position.coords.longitude,position.coords.latitude,);
+}
+var permission=document.querySelector(".error");
+function showerror(error)
+{
+if(error.PERMISSION_DENIED)
+{
+    permission.innerHTML="User doesnot give the permission ";
+}
+}
+
+// Microsoft.Dynamics.NAV.InvokeExtensibilityMethod('ControlReady', []);
