@@ -1,10 +1,10 @@
-page 50100 MyChartPage
+page 50100 LocationAndWeather
 {
     PageType = List;
     ApplicationArea = All;
     UsageCategory = Lists;
-    Caption = 'Chart Control Add-in Example';
-    SourceTable = "my Address";
+    Caption = 'Location And Weather Details';
+    SourceTable = "LocationAndWeather";
 
     layout
     {
@@ -17,8 +17,13 @@ page 50100 MyChartPage
                 var
                     myInt: Integer;
                 begin
-                    Rec.lon := GetJsonTokenValue(address, 'longi');
-                    Rec.lat := GetJsonTokenValue(address, 'lati');
+                    Rec.Longitude := GetJsonTokenValue(address, 'longi');
+                    Rec.latitude := GetJsonTokenValue(address, 'lati');
+                    Rec.Temperature := GetJsonTokenValue(address, 'temp');
+                    Rec.Humidity := GetJsonTokenValue(address, 'humidity');
+                    Rec.Wind := GetJsonTokenValue(address, 'speed')
+
+
                     // Rec.Modify();
                 end;
             }
@@ -38,18 +43,34 @@ page 50100 MyChartPage
                         CurrPage.MyChartControl.getcity(Rec.Address);
                     end;
                 }
-                field(longitude; Rec.lon)
+                field(longitude; Rec.Longitude)
                 {
                     Caption = 'longitude';
                     ApplicationArea = All;
 
                 }
-                field(latitude; Rec.lat)
+                field(latitude; Rec.latitude)
                 {
                     Caption = 'latitude';
                     ApplicationArea = All;
 
                 }
+                field(Temperature; Rec.Temperature)
+                {
+                    ApplicationArea = All;
+
+                }
+                field(Humidity; Rec.Humidity)
+                {
+                    ApplicationArea = All;
+
+                }
+                field(Wind; Rec.Wind)
+                {
+                    ApplicationArea = All;
+
+                }
+
             }
         }
     }

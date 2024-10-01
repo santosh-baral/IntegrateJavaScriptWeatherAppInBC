@@ -1,6 +1,6 @@
-table 50100 "My Address"
+table 50100 "LocationAndWeather"
 {
-    Caption = 'My Address';
+    Caption = 'Location And Weather';
     DataClassification = ToBeClassified;
 
     fields
@@ -9,7 +9,7 @@ table 50100 "My Address"
         {
             trigger OnValidate()
             var
-                "My Address": Record "My Address";
+                "My Address": Record "LocationAndWeather";
             begin
                 if "No." < xRec."No." then
                     if not "My Address".Get(Rec."No.") then begin
@@ -19,17 +19,29 @@ table 50100 "My Address"
                     end;
             end;
         }
-        field(2; Lon; Text[20])
+        field(2; Longitude; Text[20])
         {
-            Caption = 'Lon';
+            Caption = 'Longitude';
         }
-        field(3; lat; Text[20])
+        field(3; latitude; Text[20])
         {
-            Caption = 'lat';
+            Caption = 'latitude';
         }
         field(4; Address; code[20])
         {
 
+        }
+        field(6; Temperature; Text[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(7; Humidity; Text[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(8; Wind; Text[20])
+        {
+            DataClassification = ToBeClassified;
         }
         field(5; "No. series"; Code[20])
         {

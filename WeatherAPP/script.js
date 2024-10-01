@@ -30,7 +30,7 @@ let weather ={
         document.querySelector(".temp").innerText="Temp: "+ temp + "°C";
         document.querySelector(".humidity").innerText="Humidity: " + humidity + "%";
         document.querySelector(".wind").innerText="wind speed: " + speed +"km/hr";
-        showcoordinate(lon, lat);
+        showcoordinate(lon, lat,temp,humidity,speed);
     },
     displayError: function(message) {
         document.querySelector(".error").innerText = message;
@@ -58,11 +58,14 @@ function getcity(address)
 }
 
 // For store of Coordinate BC
-function showcoordinate(longitude,latitude)
+function showcoordinate(longitude,latitude,temperature,humidity,speed)
 {
     Microsoft.Dynamics.NAV.InvokeExtensibilityMethod("showcoordinate", [{
         longi: longitude,
         lati: latitude,
+        temp:temperature,
+        humidity:humidity,
+        speed:speed,
     }]);
     showLocation(longitude,latitude)
 }
@@ -92,7 +95,7 @@ const showLocation = async (longitude,latitude) => {
         document.querySelector(".municipality").innerText="Municipality : " + municipality;
         document.querySelector(".name").innerText="Name :" + name ;
         document.querySelector(".addressType").innerText= "Address Type :" + type;
-        
+
         // weather.fetchweather(city);
     } 
     catch (error) {
