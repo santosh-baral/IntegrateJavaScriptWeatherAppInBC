@@ -24,10 +24,8 @@ controladdin MyControlAddIn
 
     // Notify when the control is ready to be used
     event ControlReady();
-
     event showcoordinate(address: JsonObject);
     // You can create procedures to communicate from AL to JavaScrip
     procedure getcity(address: text);
     procedure getlocation();
-
 }

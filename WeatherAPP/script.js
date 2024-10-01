@@ -24,14 +24,13 @@ let weather ={
         const { temp, humidity }= data.main;
         const { speed }= data.wind;
         const {lon,lat}=data.coord;
-        showcoordinate(lon, lat);
-        // console.log(name,icon,description,temp,humidity,speed)
         document.querySelector(".city").innerText="Weather in " + name;
         document.querySelector(".icon").src="https://openweathermap.org/img/wn/" + icon + "@2x.png";
         document.querySelector(".description").innerText= description;
         document.querySelector(".temp").innerText="Temp: "+ temp + "°C";
         document.querySelector(".humidity").innerText="Humidity: " + humidity + "%";
         document.querySelector(".wind").innerText="wind speed: " + speed +"km/hr";
+        showcoordinate(lon, lat);
     },
     displayError: function(message) {
         document.querySelector(".error").innerText = message;
@@ -46,7 +45,6 @@ let weather ={
     init: function() {
         this.fetchweather("pokhara");
     }
-    ,
 };
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -55,6 +53,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function getcity(address)
 {
+    // Getcity:false;
     weather.fetchweather(address);   
 }
 
@@ -86,13 +85,15 @@ const showLocation = async (longitude,latitude) => {
             return;
         }
         const { type,name }= data;
-        const{ road,municipality,country,state}=data.address;
+        const{ road,municipality,country,state,city}=data.address;
         console.log('name',type,road,municipality,country,state);
         document.querySelector(".country").innerText="Country : " + country;
         document.querySelector(".state").innerText="State : " + state ;
         document.querySelector(".municipality").innerText="Municipality : " + municipality;
         document.querySelector(".name").innerText="Name :" + name ;
-        document.querySelector(".addressType").innerText= "Address Type :" + type;    
+        document.querySelector(".addressType").innerText= "Address Type :" + type;
+        
+        // weather.fetchweather(city);
     } 
     catch (error) {
         address.innerText = "Unable to fetch location details";
@@ -127,4 +128,3 @@ if(error.PERMISSION_DENIED)
 }
 }
 
-// Microsoft.Dynamics.NAV.InvokeExtensibilityMethod('ControlReady', []);
